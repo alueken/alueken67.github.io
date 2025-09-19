@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ducks & Unicorns — Cute Corner 🦆🦄</title>
+  <style>
+    :root{
+      --bg1:#FFFBFF;
+      --bg2:#E6F7FF;
+      --accent:#FF8FD8;
+      --accent2:#8FD8FF;
+      --card:#ffffffcc;
+      --shadow: 0 8px 20px rgba(51,51,51,0.08);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      background: linear-gradient(120deg,var(--bg1),var(--bg2));
+      display:flex;align-items:center;justify-content:center;flex-direction:column;
+      gap:18px;padding:28px;
+      -webkit-font-smoothing:antialiased;
+      overflow:hidden;
+    }
+    h1{margin:0;font-size:clamp(1.6rem,3.6vw,2.4rem);letter-spacing:0.6px}
+    p.lead{margin:6px 0 0 0;opacity:0.9}
+
+    /* floating scene */
+    .stage{
+      width:min(1100px,95vw);max-width:1100px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.3));padding:22px;border-radius:18px;box-shadow:var(--shadow);
+      position:relative;overflow:hidden;
+      display:grid;grid-template-columns: 1fr 380px;gap:18px;align-items:stretch;
+    }
+    /* left: big playground */
+    .playground{position:relative;padding:18px;border-radius:12px;background:var(--card);min-height:360px}
+
+    /* right: memes & controls */
+    .sidebar{padding:18px;border-radius:12px;background:linear-gradient(180deg,#fffefc,#fff);min-height:360px}
+
+    /* duck & unicorn SVGs */
+    .sprite{position:absolute;width:120px;height:120px;transform-origin:center;cursor:pointer}
+
+    /* animations */
+    @keyframes floaty {0%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-22px) rotate(3deg)}100%{transform:translateY(0) rotate(-3deg)}}
+    @keyframes glide-left {0%{transform:translateX(120%)}100%{transform:translateX(-30%)}}
+    @keyframes glide-right {0%{transform:translateX(-40%)}100%{transform:translateX(120%)}}
+    @keyframes sparkle {0%{opacity:0;transform:scale(0.6)}50%{opacity:1;transform:scale(1.1)}100%{opacity:0;transform:scale(0.6)}}
+
+    .duck{left:6%;top:18%;animation:floaty 4s ease-in-out infinite}
+    .unicorn{right:6%;top:10%;width:160px;height:160px;animation:floaty 5.2s ease-in-out infinite}
+
+    /* flying clouds */
+    .cloud{position:absolute;top:6%;width:280px;height:80px;opacity:0.9;filter:drop-shadow(0 6px 12px rgba(0,0,0,0.06));}
+    .cloud--a{left:-20%;animation:glide-left 30s linear infinite}
+    .cloud--b{right:-30%;top:36%;width:180px;height:48px;animation:glide-right 22s linear infinite}
+
+    /* little sparkles */
+    .sparkle{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 30% 30%, #fff, #fff0);opacity:0;}
+    .sparkle:nth-child(1){left:18%;top:20%;animation:sparkle 2.6s infinite}
+    .sparkle:nth-child(2){left:26%;top:48%;animation:sparkle 3.2s 0.3s infinite}
+    .sparkle:nth-child(3){left:72%;top:38%;animation:sparkle 2.9s 0.6s infinite}
+
+    /* meme cards */
+    .meme-grid{display:flex;flex-direction:column;gap:12px}
+    .meme{display:flex;gap:10px;align-items:center;padding:10px;border-radius:12px;background:#ffffff;border:1px solid #f0f0f0;box-shadow:0 6px 18px rgba(0,0,0,0.03)}
+    .meme img{width:84px;height:84px;object-fit:cover;border-radius:8px}
+    .meme .caption{font-weight:600}
+    .meme .sub{font-size:0.9rem;color:#555}
+
+    /* button */
+    .controls{display:flex;gap:8px;margin-top:12px}
+    button{background:linear-gradient(90deg,var(--accent),var(--accent2));border:none;color:white;padding:10px 12px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 8px 14px rgba(0,0,0,0.08)}
+    button.secondary{background:transparent;color:#444;border:1px solid #eee;font-weight:600}
+
+    /* responsive */
+    @media (max-width:900px){.stage{grid-template-columns:1fr;}.sidebar{order:2}.playground{order:1}}
+
+    /* cute footer */
+    .credits{text-align:center;color:#555;font-size:0.85rem;margin-top:6px}
+
+  </style>
+</head>
+<body>
+  <h1>🦆 Ducks & 🦄 Unicorns — Cute Corner</h1>
+  <p class="lead">A playful little HTML page with animations, tiny memes, and interactive sparkles. Click the sprites for surprises!</p>
+
+  <div class="stage" id="stage">
+    <div class="playground" id="playground">
+
+      <!-- clouds -->
+      <svg class="cloud cloud--a" viewBox="0 0 220 60" preserveAspectRatio="xMidYMid meet">
+        <g fill="#fff">
+          <ellipse cx="40" cy="30" rx="40" ry="22"></ellipse>
+          <ellipse cx="90" cy="22" rx="34" ry="18"></ellipse>
+          <ellipse cx="140" cy="26" rx="38" ry="20"></ellipse>
+        </g>
+      </svg>
+
+      <svg class="cloud cloud--b" viewBox="0 0 180 50" preserveAspectRatio="xMidYMid meet">
+        <g fill="#fff">
+          <ellipse cx="28" cy="24" rx="28" ry="18"></ellipse>
+          <ellipse cx="72" cy="16" rx="22" ry="12"></ellipse>
+          <ellipse cx="112" cy="22" rx="26" ry="14"></ellipse>
+        </g>
+      </svg>
+
+      <!-- sparkles -->
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+
+      <!-- duck (SVG) -->
+      <svg class="sprite duck" id="duck" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- simple cute duck -->
+        <g transform="translate(10,10)">
+          <ellipse cx="80" cy="90" rx="46" ry="34" fill="#FFF07A" stroke="#F2D34B" stroke-width="3" />
+          <circle cx="60" cy="76" r="18" fill="#fff6b2" />
+          <circle cx="52" cy="72" r="4" fill="#222" />
+          <path d="M92 82 q26 10 36 26 q6 12 -4 12 q-20 2 -44-16" fill="#fff6b2" opacity="0.9" />
+          <path d="M110 108 q8 8 18 4" stroke="#f08c00" stroke-width="6" stroke-linecap="round" fill="none" />
+        </g>
+      </svg>
+
+      <!-- unicorn (SVG) -->
+      <svg class="sprite unicorn" id="unicorn" viewBox="0 0 260 260" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(12,12)">
+          <ellipse cx="120" cy="120" rx="58" ry="44" fill="#fff" stroke="#ffe6f6" stroke-width="2" />
+          <path d="M62 110 q-28 -6 -40 -22 q-6 -8 8 -18 q20 -12 40 0" fill="#fff" />
+          <circle cx="102" cy="104" r="6" fill="#111" />
+          <!-- horn -->
+          <path d="M142 56 l18 -40 l22 46 z" fill="url(#rain)" stroke="#ffdf80" stroke-width="2"/>
+          <defs>
+            <linearGradient id="rain" x1="0" x2="1">
+              <stop offset="0%" stop-color="#FF8FD8"/>
+              <stop offset="50%" stop-color="#FFD28F"/>
+              <stop offset="100%" stop-color="#8FD8FF"/>
+            </linearGradient>
+          </defs>
+          <!-- rainbow mane -->
+          <path d="M100 80 q-8 -24 -34 -30" stroke="#FF8FD8" stroke-width="8" fill="none" stroke-linecap="round"/>
+          <path d="M118 86 q-6 -20 -28 -26" stroke="#FFD28F" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <path d="M136 92 q-4 -18 -22 -22" stroke="#8FD8FF" stroke-width="5" fill="none" stroke-linecap="round"/>
+        </g>
+      </svg>
+
+      <!-- ground banner -->
+      <div style="position:absolute;left:0;right:0;bottom:10px;text-align:center;">
+        <div style="display:inline-block;padding:10px 18px;border-radius:999px;background:linear-gradient(90deg,#fff,#fffbf8);box-shadow:0 8px 16px rgba(0,0,0,0.06);font-weight:700">Make a wish — click a friend!</div>
+      </div>
+
+    </div>
+
+    <aside class="sidebar">
+      <h3 style="margin:0 0 6px 0">Tiny Meme Vault</h3>
+      <p style="margin:0 0 12px 0;color:#666">Click a meme to enlarge it — tap the sprites for special confetti ✨</p>
+
+      <div class="meme-grid">
+
+        <div class="meme" tabindex="0" role="button" onclick="openMeme(1)">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><rect width='100%' height='100%' fill='%23FFF8F8'/><text x='50%' y='45%' font-size='20' text-anchor='middle' fill='%23333' font-family='Arial'>When the duck beats you to breakfast</text></svg>" alt="meme1">
+          <div>
+            <div class="caption">Duck stole my waffles</div>
+            <div class="sub">— so innocent, so guilty</div>
+          </div>
+        </div>
+
+        <div class="meme" tabindex="0" role="button" onclick="openMeme(2)">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><rect width='100%' height='100%' fill='%23F8FFFF'/><text x='50%' y='45%' font-size='20' text-anchor='middle' fill='%23333' font-family='Arial'>Unicorn: "I do cardio"</text></svg>" alt="meme2">
+          <div>
+            <div class="caption">Gym? Magical cardio.</div>
+            <div class="sub">— sparkles optional</div>
+          </div>
+        </div>
+
+        <div class="meme" tabindex="0" role="button" onclick="openMeme(3)">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><rect width='100%' height='100%' fill='%23FFFBEA'/><text x='50%' y='45%' font-size='20' text-anchor='middle' fill='%23333' font-family='Arial'>When your code compiles first try</text></svg>" alt="meme3">
+          <div>
+            <div class="caption">I believe in magic</div>
+            <div class="sub">— unicorn-level luck</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="controls">
+        <button onclick="makeRainbow()">Make a Rainbow</button>
+        <button class="secondary" onclick="downloadHTML()">Download HTML</button>
+      </div>
+
+      <div class="credits">Made with 💖 — ducks, unicorns & tiny memes</div>
+    </aside>
+  </div>
+
+  <!-- meme modal -->
+  <div id="modal" style="position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.45);z-index:999;padding:24px">
+    <div id="modalCard" style="background:white;padding:18px;border-radius:14px;max-width:720px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,0.25);text-align:center">
+      <div id="modalImg" style="width:100%;height:360px;display:flex;align-items:center;justify-content:center"></div>
+      <div style="margin-top:12px;display:flex;justify-content:center;gap:8px">
+        <button onclick="closeModal()">Close</button>
+        <button onclick="confettiBurst()">Confetti!</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // small interactive behaviors
+    const duck = document.getElementById('duck');
+    const unicorn = document.getElementById('unicorn');
+    const stage = document.getElementById('stage');
+
+    function burst(x,y,colorCount=6){
+      for(let i=0;i<16;i++){
+        const el=document.createElement('div');
+        el.style.position='absolute';el.style.width='10px';el.style.height='10px';el.style.borderRadius='50%';
+        const r=Math.random()*14+6;
+        el.style.left=(x)+'px';el.style.top=(y)+'px';
+        el.style.background=['#FF8FD8','#FFD28F','#8FD8FF','#FFF07A'][Math.floor(Math.random()*4)];
+        el.style.opacity=1;el.style.pointerEvents='none';
+        el.style.transform='translate(-50%,-50%)';
+        el.style.transition='transform 900ms cubic-bezier(.2,.9,.2,1),opacity 900ms';
+        stage.appendChild(el);
+        requestAnimationFrame(()=>{
+          const ang=Math.random()*Math.PI*2;const dist=60+Math.random()*160;
+          el.style.transform=`translate(${Math.cos(ang)*dist}px,${Math.sin(ang)*dist}px) scale(${Math.random()*0.9+0.6})`;
+          el.style.opacity=0;
+        });
+        setTimeout(()=>el.remove(),1000);
+      }
+    }
+
+    duck.addEventListener('click', (e)=>{
+      const rect=stage.getBoundingClientRect();
+      burst(e.clientX-rect.left,e.clientY-rect.top);
+      showToast("Quack! You made a wish 🪄");
+    });
+    unicorn.addEventListener('click', (e)=>{
+      const rect=stage.getBoundingClientRect();
+      burst(e.clientX-rect.left,e.clientY-rect.top);
+      showToast("Sparkles! Magic unlocked ✨");
+    });
+
+    // toast small message
+    function showToast(msg){
+      const t=document.createElement('div');
+      t.textContent=msg; t.style.position='absolute'; t.style.left='50%'; t.style.top='8%'; t.style.padding='8px 14px';
+      t.style.transform='translateX(-50%)'; t.style.background='rgba(255,255,255,0.95)'; t.style.borderRadius='999px'; t.style.boxShadow='0 8px 20px rgba(0,0,0,0.08)';
+      stage.appendChild(t);
+      setTimeout(()=>{t.style.transition='opacity 600ms';t.style.opacity=0;},900);
+      setTimeout(()=>t.remove(),1600);
+    }
+
+    // memes
+    function openMeme(id){
+      const modal=document.getElementById('modal');const modalImg=document.getElementById('modalImg');
+      modal.style.display='flex';
+      modalImg.innerHTML='';
+      // create a bigger SVG replica for charm
+      let svg='';
+      if(id===1) svg=`<svg width='100%' height='100%' viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='%23FFF8F8'/><text x='50%' y='50%' font-size='28' text-anchor='middle' fill='%23333' font-family='Arial'>When the duck beats you to breakfast</text></svg>`;
+      if(id===2) svg=`<svg width='100%' height='100%' viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='%23F8FFFF'/><text x='50%' y='50%' font-size='28' text-anchor='middle' fill='%23333' font-family='Arial'>Unicorn: "I do cardio"</text></svg>`;
+      if(id===3) svg=`<svg width='100%' height='100%' viewBox='0 0 600 400' xmlns='http://www.w3.org/2000/svg'><rect width='100%' height='100%' fill='%23FFFBEA'/><text x='50%' y='50%' font-size='28' text-anchor='middle' fill='%23333' font-family='Arial'>When your code compiles first try</text></svg>`;
+      modalImg.innerHTML=svg;
+    }
+    function closeModal(){document.getElementById('modal').style.display='none'}
+
+    // confetti generator
+    function confettiBurst(){
+      const modal=document.getElementById('modal');
+      const rect=modal.getBoundingClientRect();
+      for(let i=0;i<60;i++){
+        const el=document.createElement('div');el.style.position='fixed';el.style.width='10px';el.style.height='10px';el.style.borderRadius='3px';
+        el.style.left=(rect.left + rect.width*Math.random())+'px';el.style.top=(rect.top + rect.height*Math.random())+'px';
+        el.style.background=['#FF8FD8','#FFD28F','#8FD8FF','#FFF07A'][Math.floor(Math.random()*4)];el.style.zIndex=9999;el.style.opacity=1;
+        document.body.appendChild(el);
+        setTimeout(()=>{el.style.transition='transform 1200ms,opacity 1200ms';el.style.transform='translateY(300px) rotate('+Math.random()*720+'deg)';el.style.opacity=0},20);
+        setTimeout(()=>el.remove(),1400);
+      }
+    }
+
+    // rainbow effect across the playground
+    function makeRainbow(){
+      const ray=document.createElement('div');
+      ray.style.position='absolute';ray.style.left='-10%';ray.style.top='-8%';ray.style.width='120%';ray.style.height='140%';
+      ray.style.background='conic-gradient(#FF8FD8 0deg,#FFD28F 120deg,#8FD8FF 220deg,#FFF07A 300deg,#FF8FD8 360deg)';
+      ray.style.opacity='0.12';ray.style.pointerEvents='none';ray.style.borderRadius='18px';ray.style.transform='scale(0.2)';
+      ray.style.transition='transform 900ms cubic-bezier(.2,.9,.2,1),opacity 900ms';
+      document.getElementById('playground').appendChild(ray);
+      requestAnimationFrame(()=>{ray.style.transform='scale(1)';ray.style.opacity='1'});
+      setTimeout(()=>{ray.style.opacity='0';ray.style.transform='scale(0.2)';},1600);
+      setTimeout(()=>ray.remove(),2600);
+    }
+
+    // download the HTML file (self) by serializing the document
+    function downloadHTML(){
+      const html = `<!doctype html>` + '\n' + document.documentElement.outerHTML;
+      const blob = new Blob([html],{type:'text/html'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'ducks-and-unicorns.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    }
+
+    // accessibility: close modal on ESC
+    window.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal() });
+
+  </script>
+</body>
+</html>
